@@ -1,6 +1,6 @@
-package com.lavanderia.ludica.repository;
+package com.doacoessolidarias.repository;
 
-import com.lavanderia.ludica.domain.usuario.Usuario;
+import com.doacoessolidarias.domain.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;

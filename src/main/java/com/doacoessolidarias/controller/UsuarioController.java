@@ -1,7 +1,7 @@
-package com.lavanderia.ludica.controller;
+package com.doacoessolidarias.controller;
 
-import com.lavanderia.ludica.domain.usuario.Usuario;
-import com.lavanderia.ludica.service.UsuarioService;
+import com.doacoessolidarias.domain.usuario.Usuario;
+import com.doacoessolidarias.service.UsuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

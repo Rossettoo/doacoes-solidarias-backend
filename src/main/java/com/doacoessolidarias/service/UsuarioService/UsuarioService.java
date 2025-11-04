@@ -1,7 +1,7 @@
-package com.lavanderia.ludica.service;
+package com.doacoessolidarias.service.UsuarioService;
 
-import com.lavanderia.ludica.domain.usuario.Usuario;
-import com.lavanderia.ludica.repository.UsuarioRepository;
+import com.doacoessolidarias.domain.usuario.Usuario;
+import com.doacoessolidarias.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

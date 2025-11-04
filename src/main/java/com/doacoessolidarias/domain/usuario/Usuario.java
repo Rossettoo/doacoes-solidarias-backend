@@ -1,4 +1,4 @@
-package com.lavanderia.ludica.domain.usuario;
+package com.doacoessolidarias.domain.usuario;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
