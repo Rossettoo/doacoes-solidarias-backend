@@ -1,4 +1,4 @@
-package com.doacoessolidarias.service.UsuarioService;
+package com.doacoessolidarias.service;
 
 import com.doacoessolidarias.domain.usuario.Usuario;
 import com.doacoessolidarias.repository.UsuarioRepository;

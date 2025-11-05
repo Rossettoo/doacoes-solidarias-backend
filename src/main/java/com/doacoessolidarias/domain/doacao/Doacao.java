@@ -1,0 +1,53 @@
+package com.doacoessolidarias.domain.doacao;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.doacoessolidarias.domain.usuario.Usuario;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = "doacoes")
+public class Doacao {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    private String titulo;
+    private String descricao;
+    private String categoria;
+
+    @Enumerated(EnumType.STRING)
+    private StatusDoacao status = StatusDoacao.DISPONIVEL;
+
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro = LocalDateTime.now();
+
+    // Relacionamento: várias doações pertencem a um usuário (doador)
+    @ManyToOne
+    @JoinColumn(name = "doador_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private Usuario doador;
+
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public StatusDoacao getStatus() { return status; }
+    public void setStatus(StatusDoacao status) { this.status = status; }
+
+    public LocalDateTime getDataCadastro() { return dataCadastro; }
+    public void setDataCadastro(LocalDateTime dataCadastro) { this.dataCadastro = dataCadastro; }
+
+    public Usuario getDoador() { return doador; }
+    public void setDoador(Usuario doador) { this.doador = doador; }
+}

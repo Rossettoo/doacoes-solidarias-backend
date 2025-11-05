@@ -1,7 +1,9 @@
 package com.doacoessolidarias.domain.usuario;
 
+import com.doacoessolidarias.domain.doacao.Doacao;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,11 +22,20 @@ public class Usuario {
     @Column(name = "senha_hash")
     private String senhaHash;
 
-    private String role = "USER"; // padrão: USER
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_usuario", nullable = false)
+    private TipoUsuario tipoUsuario = TipoUsuario.DOADOR; // padrão
+
+    private String role = "USER"; // campo de permissão (futuro uso no login)
 
     @Column(name = "criado_em")
     private LocalDateTime criadoEm = LocalDateTime.now();
 
+    // Relacionamento: um usuário pode ter várias doações
+    @OneToMany(mappedBy = "doador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Doacao> doacoes;
+
+    // Getters e Setters
     public UUID getId() {
         return id;
     }
@@ -57,6 +68,14 @@ public class Usuario {
         this.senhaHash = senhaHash;
     }
 
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public String getRole() {
         return role;
     }
@@ -71,5 +90,13 @@ public class Usuario {
 
     public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
+    }
+
+    public List<Doacao> getDoacoes() {
+        return doacoes;
+    }
+
+    public void setDoacoes(List<Doacao> doacoes) {
+        this.doacoes = doacoes;
     }
 }
