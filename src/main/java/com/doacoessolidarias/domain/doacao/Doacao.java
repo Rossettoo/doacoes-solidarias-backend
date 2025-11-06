@@ -1,18 +1,17 @@
 package com.doacoessolidarias.domain.doacao;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import com.doacoessolidarias.domain.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "doacoes")
 public class Doacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // agora SERIAL (auto incremento)
+    private Integer id;
 
     private String titulo;
     private String descricao;
@@ -24,14 +23,13 @@ public class Doacao {
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-    // Relacionamento: várias doações pertencem a um usuário (doador)
     @ManyToOne
     @JoinColumn(name = "doador_id")
     @JsonIdentityReference(alwaysAsId = true)
     private Usuario doador;
 
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }

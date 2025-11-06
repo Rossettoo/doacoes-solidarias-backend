@@ -2,51 +2,48 @@ package com.doacoessolidarias.controller;
 
 import com.doacoessolidarias.domain.doacao.Doacao;
 import com.doacoessolidarias.domain.doacao.DoacaoDTO;
-import com.doacoessolidarias.domain.usuario.Usuario;
+import com.doacoessolidarias.domain.doacao.StatusDoacao;
 import com.doacoessolidarias.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/doacoes")
+@CrossOrigin(origins = "*")
 public class DoacaoController {
 
     @Autowired
     private DoacaoService doacaoService;
 
-    // Criar doação (recebe DTO com id do doador)
+    // Criar nova doação
     @PostMapping
     public Doacao criarDoacao(@RequestBody DoacaoDTO dto) {
-        return doacaoService.salvarDoacao(dto);
+        return doacaoService.criarDoacao(dto);
     }
 
-    // Listar todas as doações
+    // Listar todas
     @GetMapping
     public List<Doacao> listarDoacoes() {
         return doacaoService.listarDoacoes();
     }
 
-    // Buscar doação por ID
-    @GetMapping("/{id}")
-    public Optional<Doacao> buscarPorId(@PathVariable UUID id) {
-        return doacaoService.buscarPorId(id);
+    // Listar por ID do doador
+    @GetMapping("/doador/{doadorId}")
+    public List<Doacao> listarPorDoador(@PathVariable Integer doadorId) {
+        return doacaoService.listarPorDoador(doadorId);
+    }
+
+    // Atualizar status da doação
+    @PatchMapping("/{id}/status")
+    public Doacao atualizarStatus(@PathVariable Integer id, @RequestParam StatusDoacao status) {
+        return doacaoService.atualizarStatus(id, status);
     }
 
     // Deletar doação
     @DeleteMapping("/{id}")
-    public void deletarDoacao(@PathVariable UUID id) {
+    public void deletarDoacao(@PathVariable Integer id) {
         doacaoService.deletarDoacao(id);
-    }
-
-    // Buscar o doador de uma doação específica
-    @GetMapping("/{id}/doador")
-    public Usuario buscarDoadorPorDoacao(@PathVariable UUID id) {
-        return doacaoService.buscarPorId(id)
-                .map(Doacao::getDoador)
-                .orElseThrow(() -> new RuntimeException("Doação não encontrada."));
     }
 }

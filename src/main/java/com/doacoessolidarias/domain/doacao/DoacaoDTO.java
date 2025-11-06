@@ -1,12 +1,11 @@
 package com.doacoessolidarias.domain.doacao;
 
-import java.util.UUID;
-
 public class DoacaoDTO {
+
     private String titulo;
     private String descricao;
     private String categoria;
-    private UUID doador;
+    private Integer doadorId;
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
@@ -17,6 +16,6 @@ public class DoacaoDTO {
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
 
-    public UUID getDoador() { return doador; }
-    public void setDoador(UUID doador) { this.doador = doador; }
+    public Integer getDoadorId() { return doadorId; }
+    public void setDoadorId(Integer doadorId) { this.doadorId = doadorId; }
 }

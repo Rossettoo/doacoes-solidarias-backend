@@ -2,7 +2,11 @@ package com.doacoessolidarias.repository;
 
 import com.doacoessolidarias.domain.doacao.Doacao;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.UUID;
+import org.springframework.stereotype.Repository;
 
-public interface DoacaoRepository extends JpaRepository<Doacao, UUID> {
+import java.util.List;
+
+@Repository
+public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
+    List<Doacao> findByDoadorId(Integer doadorId);
 }

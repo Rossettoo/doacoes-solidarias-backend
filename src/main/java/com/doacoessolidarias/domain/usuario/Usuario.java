@@ -4,15 +4,14 @@ import com.doacoessolidarias.domain.doacao.Doacao;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // agora SERIAL (auto incremento)
+    private Integer id;
 
     private String nome;
 
@@ -31,16 +30,14 @@ public class Usuario {
     @Column(name = "criado_em")
     private LocalDateTime criadoEm = LocalDateTime.now();
 
-    // Relacionamento: um usuário pode ter várias doações
     @OneToMany(mappedBy = "doador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Doacao> doacoes;
 
-    // Getters e Setters
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

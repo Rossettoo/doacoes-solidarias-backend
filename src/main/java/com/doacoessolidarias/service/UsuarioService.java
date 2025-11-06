@@ -22,11 +22,11 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> buscarPorId(java.util.UUID id) {
+    public Optional<Usuario> buscarPorId(Integer id) {
         return usuarioRepository.findById(id);
     }
 
-    public void deletarUsuario(java.util.UUID id) {
+    public void deletarUsuario(Integer id) {
         usuarioRepository.deleteById(id);
     }
 }
